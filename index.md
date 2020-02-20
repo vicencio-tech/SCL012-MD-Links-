@@ -1,0 +1,6 @@
+[Google](https://www.google.cl/)
+[MunicipalidadDeSantiago](https://www.munstgo.cl/)
+[Minsal](https://www.minsal.cl/)
+[Sernac](https://www.sernal.cl/portal/617/w3-channel.html)
+[BancoSantander](https://www.santandep.cl/)
+[Meteochile](http://www.meteochile.cl/PortalDMC-web/index.xhtml)    
