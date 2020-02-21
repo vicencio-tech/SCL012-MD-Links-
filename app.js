@@ -4,6 +4,6 @@ const option = process.argv;
 
 
 mdl.mdlinks(pathFile,option).then((resultado)=>{
-  
+  console.log('resultado excelente ' + resultado);
 });
 

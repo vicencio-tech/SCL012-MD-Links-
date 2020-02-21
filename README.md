@@ -46,13 +46,54 @@ Se puede instala de la siguiente formas:
 
 - Vía global con el comando:
 
+npm i -g Md-Links-bianca-vicencio
+
 Este módulo incluye un ejecutable y una interfaz que se puede importar con require para usarlo.
 
 - Local para usar la Api
 
 
 ## 4. Guía de uso
+
 (En desarrollo)
+
+### Para llamar a libreria desde la terminal:
+
+PATH
+
+- Cuando path-to-file igual a un directorio
+md-links <"path-to-directory"> [options]
+
+- Cuando path-to-file igual a un archivo
+md-links <"path-to-file"> [options]
+
+Considerar que solo lee los archivos con extensión .md:
+md-links <file.md>
+
+En ambos casos, se obtiene como resultado:
+
+file: archivo o ruta donde fue encontrado el link.
+text: descripción del link.
+href: link encontrado.
+
+
+CLI (Command Line Interface)
+
+- La libreria hace las siguientes entregas:
+
+1. El usuario ingresa las opciones disponibles:
+
+--validate 
+Muestra status de los links encontrados
+
+--stats --validate 
+Entrega datos estadisticos del status (200, 300, 404, 500 etc) de los links: total, correct, broken
+
+--stats 
+Entrega datos estadisticos de los links: total
+
+2. El usuario no ingresa ninguna opción:
+Muestra solo path y links encontrados.
 
 ## 5. Documentación Técnica
 
