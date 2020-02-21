@@ -202,7 +202,6 @@ function validateLink(line,pathFile){
 
 }
 
-
 function validateLine(line,pathFile){
   line.forEach(element => { 
     
@@ -233,7 +232,6 @@ function pathAbsolute(root) {
   const isAbsolute = path.isAbsolute(root); 
   return isAbsolute;
 };
-
 
 module.exports = {
   mdlinks

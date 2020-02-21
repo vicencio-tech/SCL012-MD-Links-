@@ -2,14 +2,40 @@
 
 ## Índice
 
-* [1. Instalación de la librería](#3-instalación-de-la-librería)
-* [2. Guía de uso](#4-guía-de-uso)
-* [3. Documentación Técnica](#5-documentación-técnica)
-* [4. Autor](#6-autor)
+* [1. Antecedentes](#1-antecedentes)
+* [2. Diagrama de flujo](#2-diagrama-de-flujo)
+* [3. Instalación de la librería](#3-instalación-de-la-librería)
+* [4. Guía de uso](#4-guía-de-uso)
+* [5. Documentación Técnica](#5-documentación-técnica)
+* [6. Autor](#6-autor)
 
 ***
 
-## 1. Instalación de la librería
+## 1. Antecedentes
+
+[Markdown](https://es.wikipedia.org/wiki/Markdown) es un lenguaje de marcado
+ligero muy popular entre developers. Es usado en muchísimas plataformas que
+manejan texto plano (GitHub, foros, blogs, ...), y es muy común
+encontrar varios archivos en ese formato en cualquier tipo de repositorio
+(empezando por el tradicional `README.md`).
+
+Estos archivos `Markdown` normalmente contienen _links_ (vínculos/ligas) que
+muchas veces están rotos o ya no son válidos y eso perjudica mucho el valor de
+la información que se quiere compartir.
+
+Dentro de una comunidad de código abierto, nos han propuesto crear una
+herramienta usando [Node.js](https://nodejs.org/), que lea y analice archivos
+en formato `Markdown`, para verificar los links que contengan y reportar
+algunas estadísticas.
+
+
+## 2. Diagrama de flujo
+
+A continuación, se muestra el flujograma con el algoritmo para la implementación de la solución de Md-Links.
+
+![flujograma](https://raw.githubusercontent.com/vicencio-tech/SCL012-MD-Links-/master/img/flujograma%20Md-Links.jpg)
+
+## 3. Instalación de la librería
 
 Se puede instala de la siguiente formas:
 
@@ -24,7 +50,7 @@ Este módulo incluye un ejecutable y una interfaz que se puede importar con requ
 - Local para usar la Api
 
 
-## 2. Guía de uso
+## 4. Guía de uso
 
 ### Para llamar a libreria desde la terminal:
 
@@ -64,7 +90,7 @@ Entrega datos estadisticos de los links: total
 2. El usuario no ingresa ninguna opción:
 Muestra solo path y links encontrados.
 
-## 3. Documentación Técnica
+## 5. Documentación Técnica
 
 ### Lenguaje
 JavaScript ECMAScript 6
@@ -87,7 +113,7 @@ Jest
 module.exports
 Línea de comando CLI
 
-## 4. Autor
+## 6. Autor
 Bianca Vicencio Lemus
 
 
