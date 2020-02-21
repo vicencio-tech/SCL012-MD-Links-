@@ -33,7 +33,6 @@ const isFileOrDirectory = (path,resultArgument) => {
   });
 };
 
-
 // Imprime en terminal los archivos que concuerden con la extensión .md
 const goToDirectory = (path) => {
   return new Promise((resolve, reject) => {
@@ -114,7 +113,6 @@ function readNewFile (pathFile,resultArgument) {
       }
 
       if (resultArgument === 'case 2'){ // validate
-        console.log('caso 2');
         arrObjLinks.push(validateLink(line,pathFile)); //funcion que valida cada link y si redirecciona a una URL devuelve OK    
       }
 
@@ -161,12 +159,10 @@ function generateStatsComplete (line, opcion) {
     if(opcion === 'complete'){
       console.log('Total: ' + totalLink);
       console.log('Link Correct: ' + totalLinkOk);
-      console.log('Unique: ' + unique);
       console.log('Broken: ' + broken);
 
     }else if('parcial'){
       console.log('Total: ' + totalLink);
-      console.log('Unique: ' + unique);
     }
   },3000);
 }

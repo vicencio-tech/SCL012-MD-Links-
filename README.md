@@ -34,7 +34,7 @@ algunas estadísticas.
 
 A continuación, se muestra el flujograma con el algoritmo para la implementación de la solución de Md-Links.
 
-![flujograma](https://raw.githubusercontent.com/vicencio-tech/SCL012-MD-Links-/master/img/flujograma.jpg)
+![flujograma](https://raw.githubusercontent.com/vicencio-tech/SCL012-MD-Links-/master/img/flujograma%20Md-Links.jpg)
 
 ## 3. Instalación de la librería
 
