@@ -34,7 +34,7 @@ algunas estadísticas.
 
 A continuación, se muestra el flujograma con el algoritmo para la implementación de la solución de Md-Links.
 
-![flujograma](src/img/flujograma.jpg)
+![flujograma](https://raw.githubusercontent.com/vicencio-tech/SCL012-MD-Links-/master/img/flujograma.jpg)
 
 ## 3. Instalación de la librería
 
@@ -52,7 +52,6 @@ Este módulo incluye un ejecutable y una interfaz que se puede importar con requ
 
 
 ## 4. Guía de uso
-
 (En desarrollo)
 
 ## 5. Documentación Técnica
@@ -64,9 +63,12 @@ JavaScript ECMAScript 6
 Node.js
 
 ### Dependencias y modulos NPM
+file system
+path
+filehound
+markdown-it
+is-url
 node-fetch
-File System
-Path
 
 ### Testing
 Jest 
@@ -76,7 +78,6 @@ module.exports
 Línea de comando CLI
 
 ## 5. Autor
-
 Bianca Vicencio Lemus
 
 

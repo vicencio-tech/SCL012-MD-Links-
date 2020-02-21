@@ -10,9 +10,9 @@ const fileHound = require('filehound');
 const mdlinks = (path,option)=>{
   return new Promise((resolve,reject)=>{
     const resultArgument = validationOptions(option);
-    isFileOrDirectory(path,resultArgument);
-    //resolve(readNewFile (path,resultArgument));
-
+    const pathAbsolute = convertInAbsolute(path);
+    isFileOrDirectory(pathAbsolute,resultArgument);
+    //resolve(devolucion);
   });
 }
 
@@ -27,7 +27,7 @@ const isFileOrDirectory = (path,resultArgument) => {
     } else {
        //console.log('ir al archivo')
        lookMdFile(path);
-       readNewFile(path,resultArgument);
+       return readNewFile(path,resultArgument);
       
     }
   });
@@ -44,12 +44,12 @@ const goToDirectory = (path) => {
       .find()
       .then(res => (res.forEach(file => {
         if (file.length != 0) {
-          console.log("We have found .md files at: " + file);
-          // resolve(readMdFile(file));
+          console.log("Se ha encontrado un archivo .md en: " + file);
+          resolve(readMdFile(file));
         }
       })))
       .catch(err => {
-        reject(new Error("Path it is not valid"));
+        reject(new Error("Esto no es un archivo .md file. Intente con otro archivo" + "\n"));
       })
   })
 };
@@ -57,10 +57,10 @@ const goToDirectory = (path) => {
 const lookMdFile = (file) => {
   let extFile = path.extname(file);
       if (extFile !== ".md") {
-        console.log("This is not a .md file, try another file" + "\n");
+        console.log("Esto no es un archivo .md file. Intente con otro archivo" + "\n");
       }
   };  
-lookMdFile('README.md')
+
 
 //validar los argumentos que ingresa el usuario
 //option[3] es el primer parametro --validate
@@ -98,18 +98,24 @@ function validationOptions(option){
 
 //funcion que lee el archivo
 function readNewFile (pathFile,resultArgument) {
+
+  //crear arreglo
+  let arrObjLinks = []; 
+
   fs.readFile(pathFile, function(error, content){
     if (error){
       console.log('Ocurrió un error al leer archivo');
     }else {
       const markdownFile = markdownIt.render(content.toString()); // libreria que convierte archivo en HTML
       const line = markdownFile.split('\n'); // separa el archivo en lineas independientes
+      
       if (resultArgument === 'case 1'){ //validate y stats
         generateStatsComplete(line,'complete'); //funcion que genera stats: total, unique y broken
       }
 
       if (resultArgument === 'case 2'){ // validate
-        validateLink(line,pathFile); //funcion que valida cada link y si redirecciona a una URL devuelve       
+        console.log('caso 2');
+        arrObjLinks.push(validateLink(line,pathFile)); //funcion que valida cada link y si redirecciona a una URL devuelve OK    
       }
 
       if (resultArgument === 'case 3'){ //stats
@@ -121,6 +127,12 @@ function readNewFile (pathFile,resultArgument) {
    }
   }
   })
+  setTimeout(()=>{
+    //console.log('voy a devolver ::' + arrObjLinks);
+    return arrObjLinks;
+  },3000);
+  
+
 };
 
 function generateStatsComplete (line, opcion) {
@@ -133,6 +145,7 @@ function generateStatsComplete (line, opcion) {
     if (element.includes('http')){
       totalLink +=1;
       const cleanLink = element.substring(element.indexOf('http'), element.indexOf('">')); 
+      
       if (isURL(cleanLink)){ // valida si el link es una url    
           fetch(cleanLink).then(function(response) {
             totalLinkOk +=1;
@@ -159,39 +172,72 @@ function generateStatsComplete (line, opcion) {
 }
 
 function validateLink(line,pathFile){
+  //crear arreglo
+  let result = [];
+  //crear objeto
+  let resultObject = new Object();
   line.forEach(element => { // por cada linea analiza si tiene un <a href
     
     if (element.includes('http')){
       
       const cleanLink = element.substring(element.indexOf('http'), element.indexOf('">')); 
-     
+      const text = element.substring(element.indexOf('">')+2, element.indexOf('</'));
       if (isURL(cleanLink)){ // valida si el link es una url
         // con fetch
         fetch(cleanLink)
         .then(function(response) {
-          console.log(pathFile + ' ' + cleanLink + ' ' + response.status + ' OK');
+          console.log(pathFile + ' ' + cleanLink + ' ' + text  + ' ' + response.status + ' ' + 'OK');
+          resultObject.path = pathFile;
+          resultObject.link = cleanLink;
+          resultObject.text = text;
+         // console.log('dshds' + resultObject.text);
+          result.push(resultObject); 
         }).catch(function(err){
-          console.log(pathFile + ' ' + cleanLink + ' ' + err);
+          console.log(pathFile + ' ' + cleanLink + ' ' + text  + ' '  + ' '+ 'BAD');
         });
       }
     }
   });
+
+  setTimeout(()=>{
+    //console.log('deberia mostrarlos ' + result[0]);
+    return result;
+  },2000);
+
 }
 
 
 function validateLine(line,pathFile){
-  line.forEach(element => { // por cada linea analiza si tiene un <a href
+  line.forEach(element => { 
     
     if (element.includes('http') ){
       
       const cleanLink = element.substring(element.indexOf('http'), element.indexOf('">')); 
-     
+      const text = element.substring(element.indexOf('">')+2, element.indexOf('</'));
       if (isURL(cleanLink)){ 
-              console.log(pathFile + ' ' + cleanLink );
+              console.log(pathFile + ' ' + cleanLink + ' ' + text);
       }
     }
   });
 }
+
+// path.resolve() retorna un string
+function convertInAbsolute (root) {
+  const boleanRoot = pathAbsolute(root);
+  let rootAbsolute;
+  if (boleanRoot === true) {
+    rootAbsolute = root;
+  } else {
+    rootAbsolute = path.resolve(root);
+  }
+  return rootAbsolute;
+};
+
+function pathAbsolute(root) {
+  const isAbsolute = path.isAbsolute(root); 
+  return isAbsolute;
+};
+
 
 module.exports = {
   mdlinks
